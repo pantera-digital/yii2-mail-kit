@@ -3,7 +3,7 @@
 return [
     'Name' => 'Название',
     'Alias' => 'Псевдоним',
-    'Template' => 'Сообщения',
+    'Template' => 'Сообщение',
     'Layout' => 'Шаблон',
     'Mail Templates' => 'Шаблоны писем',
     'Create' => 'Добавить',

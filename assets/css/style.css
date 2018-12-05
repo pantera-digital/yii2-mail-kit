@@ -1,0 +1,13 @@
+#mail-template-editor-container {
+    height: 250px;
+    position: relative;
+    margin-top: -10px;
+}
+
+#mail-template-editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

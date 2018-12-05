@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: singletonn
- * Date: 9/19/18
- * Time: 3:19 PM
- */
 
 namespace pantera\mail;
 
@@ -27,5 +21,11 @@ class Module extends \yii\base\Module
                 ]
             ]
         ];
+    }
+
+    public function init()
+    {
+        parent::init();
+        ModuleAsset::register(Yii::$app->view);
     }
 }
