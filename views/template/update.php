@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model pantera\mail\models\MailTemplate */
 
-$this->title = 'Update Mail Template: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Mail Templates', 'url' => ['index']];
+$this->title = Yii::t('mail', 'Update: {NAME}', [
+        'NAME' => $model->name
+    ]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('mail', 'Mail Templates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mail-template-update">
 

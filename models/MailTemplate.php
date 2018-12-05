@@ -2,6 +2,7 @@
 
 namespace pantera\mail\models;
 
+use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
@@ -82,13 +83,13 @@ class MailTemplate extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'alias' => 'Alias',
-            'template' => 'Template',
-            'from' => 'From',
-            'subject' => 'Subject',
-            'content_type' => 'Content Type',
-            'layout_id' => 'Layout',
+            'name' => Yii::t('mail', 'Name'),
+            'alias' => Yii::t('mail', 'Alias'),
+            'template' => Yii::t('mail', 'Template'),
+            'from' => Yii::t('mail', 'From'),
+            'subject' => Yii::t('mail', 'Subject'),
+            'content_type' => Yii::t('mail', 'Content Type'),
+            'layout_id' => Yii::t('mail', 'Layout'),
         ];
     }
 

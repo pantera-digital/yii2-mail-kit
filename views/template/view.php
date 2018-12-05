@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 /* @var $model pantera\mail\models\MailTemplate */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Mail Templates', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('mail', 'Mail Templates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mail-template-view">
@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('mail', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('mail', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -39,6 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'content_type',
                 'value' => function (MailTemplate $model) {
                     return $model->getCurrentContentType();
+                },
+            ],
+            [
+                'attribute' => 'layout_id',
+                'value' => function (MailTemplate $model) {
+                    return $model->layout ? $model->layout->name : '';
                 },
             ],
         ],

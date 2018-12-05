@@ -8,6 +8,8 @@
 
 namespace pantera\mail;
 
+use Yii;
+
 class Module extends \yii\base\Module
 {
     /* @var array Массив ролей которым доступна админка */
@@ -21,7 +23,7 @@ class Module extends \yii\base\Module
                 'url' => '#',
                 'icon' => 'envelope',
                 'items' => [
-                    ['label' => 'Template', 'url' => ['/mail/template/index']],
+                    ['label' => Yii::t('mail', 'Mail Templates'), 'url' => ['/mail/template/index']],
                 ]
             ]
         ];

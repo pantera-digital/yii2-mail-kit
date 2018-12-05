@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel pantera\mail\models\MailTemplateSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mail Templates';
+$this->title = Yii::t('mail', 'Mail Templates');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mail-template-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
 
     <p>
-        <?= Html::a('Create Mail Template', ['create'], [
+        <?= Html::a(Yii::t('mail', 'Create'), ['create'], [
             'class' => 'btn btn-success',
             'data' => [
                 'pjax' => 0,
