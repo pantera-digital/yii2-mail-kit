@@ -22,15 +22,26 @@ class Mailer extends \yii\swiftmailer\Mailer implements MailerInterface
      * Создание нового сообщения
      * @param string $alias Ключ шаблона
      * @param array $params Массив параметров для использования
+     * @param bool $layout Флаг что нужно отрендерить шаблон
      * @return MessageInterface
-     * @throws \yii\base\InvalidConfigException
      * @throws MailTemplateNotFoundException
+     * @throws \yii\base\InvalidConfigException
      */
-    public function composeTemplate(string $alias, array $params = []): MessageInterface
+    public function composeTemplate(string $alias, array $params = [], bool $layout = true): MessageInterface
     {
         $model = $this->findTemplate($alias);
         $content = $this->prepare($model->template, $params);
         $message = $this->createMessage();
+        if ($layout) {
+            $content = $this->getView()->render(
+                $model->content_type === MailTemplate::CONTENT_TYPE_HTML ? $this->htmlLayout : $this->textLayout,
+                [
+                    'content' => $content,
+                    'message' => $message,
+                ],
+                $this
+            );
+        }
         if ($model->content_type === MailTemplate::CONTENT_TYPE_HTML) {
             $message->setHtmlBody($content);
         } else {

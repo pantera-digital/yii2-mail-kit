@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'template')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'template')->textarea(['rows' => 12]) ?>
 
     <?= $form->field($model, 'from')->textInput(['maxlength' => true]) ?>
 
