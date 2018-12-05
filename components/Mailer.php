@@ -13,7 +13,6 @@ use pantera\mail\exceptions\MailTemplateNotFoundException;
 use pantera\mail\models\MailTemplate;
 use Yii;
 use yii\mail\MessageInterface;
-use function is_null;
 
 class Mailer extends \yii\swiftmailer\Mailer implements MailerInterface
 {
@@ -31,7 +30,11 @@ class Mailer extends \yii\swiftmailer\Mailer implements MailerInterface
         $model = $this->findTemplate($alias);
         $content = $this->prepare($model->template, $params);
         $message = $this->createMessage();
-        if ($layout) {
+        if ($model->layout && $layout) {
+            $content = $this->prepare($model->layout->template, [
+                'content' => $content,
+            ]);
+        } elseif ($layout) {
             $content = $this->getView()->render(
                 $model->content_type === MailTemplate::CONTENT_TYPE_HTML ? $this->htmlLayout : $this->textLayout,
                 [

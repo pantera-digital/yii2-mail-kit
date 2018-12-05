@@ -2,7 +2,8 @@
 
 namespace pantera\mail\models;
 
-use function array_keys;
+use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%mail_template}}".
@@ -14,11 +15,21 @@ use function array_keys;
  * @property string $from
  * @property string $subject
  * @property string $content_type
+ * @property integer $layout_id
+ *
+ * @property MailTemplate $layout
  */
 class MailTemplate extends \yii\db\ActiveRecord
 {
     const CONTENT_TYPE_PLAINT = 'plaint';
     const CONTENT_TYPE_HTML = 'html';
+
+    public static function getList(): array
+    {
+        $models = self::find()
+            ->all();
+        return ArrayHelper::map($models, 'id', 'name');
+    }
 
     /**
      * Получить список возможных content type
@@ -56,6 +67,7 @@ class MailTemplate extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'alias'], 'required'],
+            [['layout_id'], 'integer'],
             [['template'], 'string'],
             [['name', 'alias', 'from', 'subject'], 'string', 'max' => 255],
             [['alias'], 'unique'],
@@ -76,6 +88,12 @@ class MailTemplate extends \yii\db\ActiveRecord
             'from' => 'From',
             'subject' => 'Subject',
             'content_type' => 'Content Type',
+            'layout_id' => 'Layout',
         ];
+    }
+
+    public function getLayout(): ActiveQuery
+    {
+        return $this->hasOne(MailTemplate::class, ['id' => 'layout_id']);
     }
 }

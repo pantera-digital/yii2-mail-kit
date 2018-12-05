@@ -2,10 +2,8 @@
 
 namespace pantera\mail\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use pantera\mail\models\MailTemplate;
 
 /**
  * MailTemplateSearch represents the model behind the search form of `pantera\mail\models\MailTemplate`.

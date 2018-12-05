@@ -4,4 +4,6 @@ parameters:
     phpcs:
       standard: PSR2
       whitelist_patterns:
-      - "/(.*)/"
+        - "/(.*)/"
+      ignore_patterns:
+        - "/migrations/(*)"
