@@ -22,7 +22,7 @@ use yii\helpers\ArrayHelper;
  */
 class MailTemplate extends \yii\db\ActiveRecord
 {
-    const CONTENT_TYPE_PLAINT = 'plaint';
+    const CONTENT_TYPE_PLAIN = 'plaint';
     const CONTENT_TYPE_HTML = 'html';
 
     public static function getList(): array
@@ -39,7 +39,7 @@ class MailTemplate extends \yii\db\ActiveRecord
     public function getContentTypeList(): array
     {
         return [
-            self::CONTENT_TYPE_PLAINT => 'Plaint',
+            self::CONTENT_TYPE_PLAIN => 'Plain',
             self::CONTENT_TYPE_HTML => 'Html',
         ];
     }
