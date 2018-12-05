@@ -6,7 +6,8 @@
     "yiisoft/yii2": "~2.0.6",
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-twig": "2.0.6",
-    "mikehaertl/php-tmpfile": "^1.1"
+    "mikehaertl/php-tmpfile": "^1.1",
+    "npm-asset/ace-builds": "*"
   },
   "autoload": {
     "psr-4": {
