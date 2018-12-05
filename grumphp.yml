@@ -1,0 +1,7 @@
+# grumphp.yml
+parameters:
+  tasks:
+    phpcs:
+      standard: PSR2
+      whitelist_patterns:
+      - "/(.*)/"

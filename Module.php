@@ -8,7 +8,6 @@
 
 namespace pantera\mail;
 
-
 class Module extends \yii\base\Module
 {
     /* @var array Массив ролей которым доступна админка */
@@ -16,8 +15,15 @@ class Module extends \yii\base\Module
 
     public function getMenuItems()
     {
-        return [['label' => 'E-mail', 'url' => '#', 'icon' => 'envelope', 'items' => [
-            ['label' => 'Template', 'url' => ['/mail/template/index']],
-        ]]];
+        return [
+            [
+                'label' => 'E-mail',
+                'url' => '#',
+                'icon' => 'envelope',
+                'items' => [
+                    ['label' => 'Template', 'url' => ['/mail/template/index']],
+                ]
+            ]
+        ];
     }
 }

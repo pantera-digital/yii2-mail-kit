@@ -8,7 +8,6 @@
 
 namespace pantera\mail\components;
 
-
 use mikehaertl\tmp\File;
 use pantera\mail\exceptions\MailTemplateNotFoundException;
 use pantera\mail\models\MailTemplate;

@@ -8,7 +8,6 @@
 
 namespace pantera\mail;
 
-
 use Yii;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
@@ -23,6 +22,7 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
         Yii::$container->set(Mailer::class, \pantera\mail\components\Mailer::class);
     }
 }

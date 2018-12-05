@@ -8,7 +8,6 @@
 
 namespace pantera\mail\components;
 
-
 use yii\mail\MessageInterface;
 
 interface MailerInterface extends \yii\mail\MailerInterface

@@ -26,7 +26,7 @@ class TemplateController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -35,7 +35,7 @@ class TemplateController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -52,6 +52,7 @@ class TemplateController extends Controller
         $searchModel = new MailTemplateSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        /** @noinspection MissedViewInspection */
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -66,6 +67,7 @@ class TemplateController extends Controller
      */
     public function actionView($id)
     {
+        /** @noinspection MissedViewInspection */
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -84,6 +86,7 @@ class TemplateController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        /** @noinspection MissedViewInspection */
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -104,6 +107,7 @@ class TemplateController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        /** @noinspection MissedViewInspection */
         return $this->render('update', [
             'model' => $model,
         ]);
