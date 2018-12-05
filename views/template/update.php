@@ -9,7 +9,6 @@ $this->title = Yii::t('mail', 'Update: {NAME}', [
         'NAME' => $model->name
     ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('mail', 'Mail Templates'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mail-template-update">

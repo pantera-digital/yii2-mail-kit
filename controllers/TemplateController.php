@@ -60,20 +60,6 @@ class TemplateController extends Controller
     }
 
     /**
-     * Displays a single MailTemplate model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        /** @noinspection MissedViewInspection */
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new MailTemplate model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -83,7 +69,7 @@ class TemplateController extends Controller
         $model = new MailTemplate();
         $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         /** @noinspection MissedViewInspection */
@@ -104,7 +90,7 @@ class TemplateController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         /** @noinspection MissedViewInspection */
