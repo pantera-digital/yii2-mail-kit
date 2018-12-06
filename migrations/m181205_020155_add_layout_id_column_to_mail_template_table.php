@@ -15,19 +15,19 @@ class m181205_020155_add_layout_id_column_to_mail_template_table extends Migrati
      */
     public function safeUp()
     {
-        $this->addColumn('mail_template', 'layout_id', $this->integer()->null());
+        $this->addColumn('{{%mail_template}}', 'layout_id', $this->integer()->null());
 
         // creates index for column `layout_id`
         $this->createIndex(
             'idx-mail_template-layout_id',
-            'mail_template',
+            '{{%mail_template}}',
             'layout_id'
         );
 
         // add foreign key for table `mail_template`
         $this->addForeignKey(
             'fk-mail_template-layout_id',
-            'mail_template',
+            '{{%mail_template}}',
             'layout_id',
             'mail_template',
             'id',
@@ -44,15 +44,15 @@ class m181205_020155_add_layout_id_column_to_mail_template_table extends Migrati
         // drops foreign key for table `mail_template`
         $this->dropForeignKey(
             'fk-mail_template-layout_id',
-            'mail_template'
+            '{{%mail_template}}'
         );
 
         // drops index for column `layout_id`
         $this->dropIndex(
             'idx-mail_template-layout_id',
-            'mail_template'
+            '{{%mail_template}}'
         );
 
-        $this->dropColumn('mail_template', 'layout_id');
+        $this->dropColumn('{{%mail_template}}', 'layout_id');
     }
 }
