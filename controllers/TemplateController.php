@@ -143,7 +143,7 @@ class TemplateController extends Controller
         } else {
             $result = [
                 'status' => false,
-                'message' => Yii::t('mail', 'Используется как layout в других письмах.<br>Все равно удалить?'),
+                'message' => Yii::t('mail', 'Used as layout in other letters.<br>Anyway delete?'),
                 'swalConfig' => [
                     'confirmButtonText' => Yii::t('mail', 'Yes'),
                     'cancelButtonText' => Yii::t('mail', 'No'),
