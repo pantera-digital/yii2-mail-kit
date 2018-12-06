@@ -12,11 +12,10 @@
     left: 0;
 }
 
-.fancybox-container__mail-template-preview .fancybox-content{
-    width: 650px;
+.fancybox-container--mail-template-preview .fancybox-content{
     height: 800px;
 }
 
-.fancybox-container__mail-template-preview .fancybox-content iframe{
+.fancybox-container--mail-template-preview .fancybox-content iframe{
     padding: 20px;
 }

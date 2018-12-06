@@ -43,11 +43,10 @@ const mailTemplateClass = function () {
                 const html = result;
                 iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
                 iframe.classList.add('fancybox-iframe');
-                iframe.width = '600px';
-                iframe.height = '800px';
                 $.fancybox.open(iframe, {
-                    baseClass: 'fancybox-container__mail-template-preview',
+                    baseClass: 'fancybox-container--mail-template-preview',
                 });
+                $('.fancybox-container--mail-template-preview .fancybox-content').width($(result).find('div:first').width());
             });
             return false;
         });
