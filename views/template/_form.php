@@ -1,6 +1,7 @@
 <?php
 
 use pantera\mail\models\MailTemplate;
+use yii\bootstrap\ButtonGroup;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -37,7 +38,19 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('mail', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= ButtonGroup::widget([
+            'buttons' => [
+                Html::submitButton(Yii::t('mail', 'Save'), ['class' => 'btn btn-success']),
+                Html::submitButton(Yii::t('mail', 'Apply'), [
+                    'class' => 'btn btn-primary',
+                    'name' => 'action',
+                    'value' => 'apply',
+                ]),
+                Html::a(Yii::t('mail', 'Preview'), ['preview'], [
+                    'class' => 'btn btn-default mail-template-preview',
+                ]),
+            ],
+        ]) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

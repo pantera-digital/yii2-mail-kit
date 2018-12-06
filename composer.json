@@ -7,7 +7,8 @@
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-twig": "*",
     "mikehaertl/php-tmpfile": "^1.1",
-    "npm-asset/ace-builds": "*"
+    "npm-asset/ace-builds": "*",
+    "bower-asset/fancybox": "*"
   },
   "autoload": {
     "psr-4": {

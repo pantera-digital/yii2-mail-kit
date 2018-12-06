@@ -16,6 +16,8 @@ use yii\mail\MessageInterface;
 
 class Mailer extends \yii\swiftmailer\Mailer implements MailerInterface
 {
+    private $message;
+
     /**
      * Создание нового сообщения
      * @param string $alias Ключ шаблона
@@ -28,8 +30,33 @@ class Mailer extends \yii\swiftmailer\Mailer implements MailerInterface
     public function composeTemplate(string $alias, array $params = [], bool $layout = true): MessageInterface
     {
         $model = $this->findTemplate($alias);
+        $this->message = $this->createMessage();
+        $content = $this->renderTemplate($model, $params, $layout);
+        if ($model->content_type === MailTemplate::CONTENT_TYPE_HTML) {
+            $this->message->setHtmlBody($content);
+        } else {
+            $this->message->setTextBody($content);
+        }
+        if ($model->from) {
+            $this->message->setFrom($model->from);
+        }
+        if ($model->subject) {
+            $this->message->setSubject($model->subject);
+        }
+        return $this->message;
+    }
+
+    /**
+     * Отрендерить шаблон
+     * если нужно использовать layout
+     * @param MailTemplate $model
+     * @param array $params
+     * @param bool $layout
+     * @return string
+     */
+    public function renderTemplate(MailTemplate $model, array $params = [], bool $layout = true): string
+    {
         $content = $this->prepare($model->template, $params);
-        $message = $this->createMessage();
         if ($model->layout && $layout) {
             $content = $this->prepare($model->layout->template, [
                 'content' => $content,
@@ -39,23 +66,12 @@ class Mailer extends \yii\swiftmailer\Mailer implements MailerInterface
                 $model->content_type === MailTemplate::CONTENT_TYPE_HTML ? $this->htmlLayout : $this->textLayout,
                 [
                     'content' => $content,
-                    'message' => $message,
+                    'message' => $this->message,
                 ],
                 $this
             );
         }
-        if ($model->content_type === MailTemplate::CONTENT_TYPE_HTML) {
-            $message->setHtmlBody($content);
-        } else {
-            $message->setTextBody($content);
-        }
-        if ($model->from) {
-            $message->setFrom($model->from);
-        }
-        if ($model->subject) {
-            $message->setSubject($model->subject);
-        }
-        return $message;
+        return $content;
     }
 
     /**

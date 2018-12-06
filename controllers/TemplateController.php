@@ -7,6 +7,7 @@ use pantera\mail\models\MailTemplateSearch;
 use pantera\mail\Module;
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\AjaxFilter;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,9 +39,22 @@ class TemplateController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                    'preview' => ['POST'],
                 ],
             ],
+            'ajax' => [
+                'class' => AjaxFilter::class,
+                'only' => ['preview'],
+            ],
         ];
+    }
+
+    public function actionPreview()
+    {
+        $model = new MailTemplate();
+        $model->load(Yii::$app->request->post());
+        /** @noinspection MissedViewInspection */
+        return Yii::$app->mailer->renderTemplate($model);
     }
 
     /**
@@ -51,7 +65,6 @@ class TemplateController extends Controller
     {
         $searchModel = new MailTemplateSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         /** @noinspection MissedViewInspection */
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -69,9 +82,14 @@ class TemplateController extends Controller
         $model = new MailTemplate();
         $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('mail', '{NAME} saved', [
+                'NAME' => $model->name,
+            ]));
+            if (Yii::$app->request->post('action') === 'apply') {
+                return $this->redirect(['update', 'id' => $model->id]);
+            }
             return $this->redirect(['index']);
         }
-
         /** @noinspection MissedViewInspection */
         return $this->render('create', [
             'model' => $model,
@@ -88,11 +106,15 @@ class TemplateController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('mail', '{NAME} saved', [
+                'NAME' => $model->name,
+            ]));
+            if (Yii::$app->request->post('action') === 'apply') {
+                return $this->redirect(['update', 'id' => $model->id]);
+            }
             return $this->redirect(['index']);
         }
-
         /** @noinspection MissedViewInspection */
         return $this->render('update', [
             'model' => $model,
@@ -111,7 +133,6 @@ class TemplateController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
@@ -127,7 +148,6 @@ class TemplateController extends Controller
         if (($model = MailTemplate::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
