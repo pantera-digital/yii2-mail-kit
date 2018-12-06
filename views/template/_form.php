@@ -22,9 +22,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'from')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'content_type')->dropDownList($model->getContentTypeList(), [
-                'prompt' => '',
-            ]) ?>
+            <?= $form->field($model, 'content_type')->dropDownList($model->getContentTypeList()) ?>
 
             <?= $form->field($model, 'layout_id')->dropDownList(MailTemplate::getList(), [
                 'prompt' => '',

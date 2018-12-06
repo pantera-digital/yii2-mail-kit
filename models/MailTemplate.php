@@ -68,7 +68,7 @@ class MailTemplate extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'alias'], 'required'],
+            [['name', 'alias', 'content_type'], 'required'],
             [['layout_id'], 'integer'],
             [['template'], 'string'],
             [['name', 'alias', 'from', 'subject'], 'string', 'max' => 255],
