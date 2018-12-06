@@ -34,5 +34,26 @@ class Bootstrap implements BootstrapInterface
                 'sourceLanguage' => 'en-US'
             ];
         }
+
+        $this->addUrlConfig();
+    }
+
+    protected function addUrlConfig()
+    {
+        $configUrlRule = [
+            'rules' => [
+                [
+                    'pattern' => 'mail/template/update/<alias>',
+                    'route' => 'mail/template/update',
+                ],
+                [
+                    'pattern' => 'mail/template/delete/<alias>',
+                    'route' => 'mail/template/delete',
+                ]
+            ],
+        ];
+        $configUrlRule['class'] = 'yii\web\GroupUrlRule';
+        $rule = Yii::createObject($configUrlRule);
+        Yii::$app->urlManager->addRules([$rule], false);
     }
 }

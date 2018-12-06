@@ -99,13 +99,13 @@ class TemplateController extends Controller
     /**
      * Updates an existing MailTemplate model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $alias
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($alias)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($alias);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('mail', '{NAME} saved', [
                 'NAME' => $model->name,
@@ -124,28 +124,29 @@ class TemplateController extends Controller
     /**
      * Deletes an existing MailTemplate model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $alias
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      * @throws \Throwable
      * @throws \yii\db\StaleObjectException
      */
-    public function actionDelete($id)
+    public function actionDelete(string $alias)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($alias)->delete();
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the MailTemplate model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param string $alias
      * @return MailTemplate the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(string $alias)
     {
-        if (($model = MailTemplate::findOne($id)) !== null) {
+        $model = MailTemplate::find()
+            ->andWhere(['=', 'alias', $alias])
+            ->one();
+        if ($model) {
             return $model;
         }
         throw new NotFoundHttpException('The requested page does not exist.');

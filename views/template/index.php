@@ -48,6 +48,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update}{delete}',
+                'urlCreator' => function (string $action, MailTemplate $model) {
+                    return [$action, 'alias' => $model->alias];
+                }
             ],
         ],
     ]); ?>
