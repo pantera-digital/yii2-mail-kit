@@ -1,10 +1,10 @@
-#mail-template-editor-container {
+#mail-template-editor-container, #mail-data-editor-container {
     height: 250px;
     position: relative;
     margin-top: -10px;
 }
 
-#mail-template-editor {
+#mail-template-editor, #mail-data-editor {
     position: absolute;
     top: 0;
     right: 0;

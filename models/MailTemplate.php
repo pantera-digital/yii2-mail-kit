@@ -92,7 +92,7 @@ class MailTemplate extends \yii\db\ActiveRecord
             'subject' => Yii::t('mail', 'Subject'),
             'content_type' => Yii::t('mail', 'Content Type'),
             'layout_id' => Yii::t('mail', 'Layout'),
-            'data' => Yii::t('mail', 'Data to be transferred to the template'),
+            'data' => Yii::t('mail', 'Sample data to be transferred to the template'),
         ];
     }
 

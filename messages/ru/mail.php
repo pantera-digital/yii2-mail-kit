@@ -14,4 +14,5 @@ return [
     '{NAME} saved' => '{NAME} сохранен',
     'Yes' => 'Да',
     'No' => 'Нет',
+    'Sample data to be transferred to the template' => 'Пример данных которые будут переданы в шаблон',
 ];

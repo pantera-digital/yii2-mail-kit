@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 <div class="mail-template-form">
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
@@ -29,8 +29,13 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'layout_id')->dropDownList(MailTemplate::getList(), [
                 'prompt' => '',
             ]) ?>
+
+            <?= $form->field($model, 'data')->hiddenInput() ?>
+            <div id="mail-data-editor-container" class="form-group">
+                <div id="mail-data-editor"></div>
+            </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <?= $form->field($model, 'template')->hiddenInput() ?>
             <div id="mail-template-editor-container" class="form-group">
                 <div id="mail-template-editor"></div>

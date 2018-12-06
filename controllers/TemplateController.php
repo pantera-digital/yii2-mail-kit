@@ -9,6 +9,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\filters\AjaxFilter;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -54,7 +55,7 @@ class TemplateController extends Controller
         $model = new MailTemplate();
         $model->load(Yii::$app->request->post());
         /** @noinspection MissedViewInspection */
-        return Yii::$app->mailer->renderTemplate($model);
+        return Yii::$app->mailer->renderTemplate($model, $model->data ? Json::decode($model->data) : []);
     }
 
     /**

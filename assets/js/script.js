@@ -1,6 +1,7 @@
 const mailTemplateClass = function () {
     this.init = function () {
         this.initAce();
+        this.initDataField()
         this.initEvents();
     };
     this.initAce = function () {
@@ -9,6 +10,18 @@ const mailTemplateClass = function () {
             const editor = ace.edit("mail-template-editor");
             editor.setTheme("ace/theme/dracula");
             editor.getSession().setMode({path: "ace/mode/twig", inline: true});
+            editor.getSession().on("change", function () {
+                textarea.val(editor.getSession().getValue());
+            });
+            editor.getSession().setValue(textarea.val());
+        }
+    };
+    this.initDataField = function () {
+        const textarea = $('#mailtemplate-data');
+        if (textarea.length) {
+            const editor = ace.edit("mail-data-editor");
+            editor.setTheme("ace/theme/dracula");
+            editor.getSession().setMode({path: "ace/mode/json", inline: true});
             editor.getSession().on("change", function () {
                 textarea.val(editor.getSession().getValue());
             });
