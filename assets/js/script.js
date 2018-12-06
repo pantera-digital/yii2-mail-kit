@@ -8,6 +8,9 @@ const mailTemplateClass = function () {
         const textarea = $('#mailtemplate-template');
         if (textarea.length) {
             const editor = ace.edit("mail-template-editor");
+            editor.setOptions({
+                fontSize: "10pt"
+            });
             editor.setTheme("ace/theme/dracula");
             editor.getSession().setMode({path: "ace/mode/twig", inline: true});
             editor.getSession().on("change", function () {
@@ -20,6 +23,9 @@ const mailTemplateClass = function () {
         const textarea = $('#mailtemplate-data');
         if (textarea.length) {
             const editor = ace.edit("mail-data-editor");
+            editor.setOptions({
+                fontSize: "10pt"
+            });
             editor.setTheme("ace/theme/dracula");
             editor.getSession().setMode({path: "ace/mode/json", inline: true});
             editor.getSession().on("change", function () {
