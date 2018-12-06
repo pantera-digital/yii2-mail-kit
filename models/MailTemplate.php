@@ -17,12 +17,13 @@ use yii\helpers\ArrayHelper;
  * @property string $subject
  * @property string $content_type
  * @property integer $layout_id
+ * @property string $data
  *
  * @property MailTemplate $layout
  */
 class MailTemplate extends \yii\db\ActiveRecord
 {
-    const CONTENT_TYPE_PLAIN = 'plaint';
+    const CONTENT_TYPE_PLAIN = 'plain';
     const CONTENT_TYPE_HTML = 'html';
 
     public static function getList(): array
@@ -72,6 +73,7 @@ class MailTemplate extends \yii\db\ActiveRecord
             [['template'], 'string'],
             [['name', 'alias', 'from', 'subject'], 'string', 'max' => 255],
             [['alias'], 'unique'],
+            [['data'], 'safe'],
             [['content_type'], 'in', 'range' => array_keys($this->getContentTypeList())],
         ];
     }
@@ -90,6 +92,7 @@ class MailTemplate extends \yii\db\ActiveRecord
             'subject' => Yii::t('mail', 'Subject'),
             'content_type' => Yii::t('mail', 'Content Type'),
             'layout_id' => Yii::t('mail', 'Layout'),
+            'data' => Yii::t('mail', 'Data to be transferred to the template'),
         ];
     }
 
