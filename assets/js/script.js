@@ -16,6 +16,7 @@ const mailTemplateClass = function () {
         }
     };
     this.initEvents = function () {
+        //Открытие превью в модальном окне
         $(document).on('click', '.mail-template-preview', function () {
             const self = $(this);
             $.post(self.attr('href'), self.parents('form').serialize()).done(function (result) {
@@ -29,6 +30,44 @@ const mailTemplateClass = function () {
                     baseClass: 'fancybox-container__mail-template-preview',
                 });
             });
+            return false;
+        });
+        //Удаление шаблона
+        $(document).on('click', '.mail-template-delete', function () {
+            const self = $(this);
+            if (confirm(self.data('confirm-text'))) {
+                $.post(self.attr('href')).always(function (result) {
+                    if (result.status) {
+                        window.location.reload();
+                    } else {
+                        const defaultConfig = {
+                            html: result.message,
+                            type: 'warning',
+                            showCloseButton: true,
+                            showCancelButton: true,
+                            showLoaderOnConfirm: true,
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonColor: '#d33',
+                            preConfirm: (result) => {
+                                return new Promise(function (resolve) {
+                                    const data = {
+                                        force: true,
+                                    };
+                                    return $.post(self.attr('href'), data, function (result) {
+                                        resolve(result);
+                                    });
+                                });
+                            },
+                        };
+                        const config = $.extend(defaultConfig, result.swalConfig);
+                        swal(config).then(function(result){
+                            if (result.status) {
+                                window.location.reload();
+                            }
+                        });
+                    }
+                });
+            }
             return false;
         });
     }

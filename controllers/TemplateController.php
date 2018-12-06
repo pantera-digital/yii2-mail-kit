@@ -86,7 +86,7 @@ class TemplateController extends Controller
                 'NAME' => $model->name,
             ]));
             if (Yii::$app->request->post('action') === 'apply') {
-                return $this->redirect(['update', 'id' => $model->id]);
+                return $this->redirect(['update', 'alias' => $model->alias]);
             }
             return $this->redirect(['index']);
         }
@@ -111,7 +111,7 @@ class TemplateController extends Controller
                 'NAME' => $model->name,
             ]));
             if (Yii::$app->request->post('action') === 'apply') {
-                return $this->redirect(['update', 'id' => $model->id]);
+                return $this->redirect(['update', 'alias' => $model->alias]);
             }
             return $this->redirect(['index']);
         }
@@ -122,8 +122,6 @@ class TemplateController extends Controller
     }
 
     /**
-     * Deletes an existing MailTemplate model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $alias
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -132,8 +130,26 @@ class TemplateController extends Controller
      */
     public function actionDelete(string $alias)
     {
-        $this->findModel($alias)->delete();
-        return $this->redirect(['index']);
+        $model = $this->findModel($alias);
+        $usedAsLayout = MailTemplate::find()
+            ->andWhere(['=', 'layout_id', $model->id])
+            ->count();
+        if (!$usedAsLayout || Yii::$app->request->post('force')) {
+            $model->delete();
+            $result = [
+                'status' => true,
+            ];
+        } else {
+            $result = [
+                'status' => false,
+                'message' => Yii::t('mail', 'Используется как layout в других письмах.<br>Все равно удалить?'),
+                'swalConfig' => [
+                    'confirmButtonText' => Yii::t('mail', 'Yes'),
+                    'cancelButtonText' => Yii::t('mail', 'No'),
+                ],
+            ];
+        }
+        return $this->asJson($result);
     }
 
     /**

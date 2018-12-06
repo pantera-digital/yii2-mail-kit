@@ -50,7 +50,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{update}{delete}',
                 'urlCreator' => function (string $action, MailTemplate $model) {
                     return [$action, 'alias' => $model->alias];
-                }
+                },
+                'buttons' => [
+                    'delete' => function ($url, $model, $key) {
+                        return Html::a(Html::tag('span', null, [
+                            'class' => 'glyphicon glyphicon-trash',
+                        ]), $url, [
+                            'class' => 'mail-template-delete',
+                            'data' => [
+                                'confirm-text' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                            ],
+                        ]);
+                    },
+                ]
             ],
         ],
     ]); ?>
