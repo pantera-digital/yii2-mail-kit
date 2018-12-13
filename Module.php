@@ -27,5 +27,6 @@ class Module extends \yii\base\Module
     {
         parent::init();
         ModuleAsset::register(Yii::$app->view);
+        Yii::$app->view->registerJs('(new mailTemplateClass()).init()');
     }
 }
