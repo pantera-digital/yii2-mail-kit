@@ -33,7 +33,7 @@ php yii migrate
 ```
 ### Использование
 Yii::$app->mailer->composeTemplate(strign $template, array $params = [])
-    ->to($to)
+    ->setTo($to)
     ->send();
 * $template Алиас шаблона
 * $params Массив параметров которые будут переданны в twig
