@@ -13,7 +13,7 @@
 }
 
 .fancybox-container--mail-template-preview .fancybox-content{
-    height: 800px;
+    max-height: 800px;
 }
 
 .fancybox-container--mail-template-preview .fancybox-content iframe{

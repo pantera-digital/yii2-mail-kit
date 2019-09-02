@@ -1,8 +1,12 @@
 const mailTemplateClass = function () {
     this.init = function () {
+        if (mailTemplateClass.isInit) {
+            return;
+        }
         this.initAce();
         this.initDataField();
         this.initEvents();
+        mailTemplateClass.isInit = true;
     };
     this.initEvents = function () {
         //Открытие превью в модальном окне
@@ -11,6 +15,7 @@ const mailTemplateClass = function () {
         $(document).on('click', '.mail-template-delete', this.templateDelete.bind(this));
     };
 };
+mailTemplateClass.isInit = false;
 mailTemplateClass.prototype.initDataField = function () {
     const textarea = $('#mailtemplate-data');
     if (textarea.length) {
@@ -45,13 +50,9 @@ mailTemplateClass.prototype.initAce = function () {
 mailTemplateClass.prototype.openPreview = function (e) {
     const self = $(e.target);
     $.post(self.attr('href'), self.parents('form').serialize()).done(function (result) {
-        const iframe = document.createElement('iframe');
-        iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(result);
-        iframe.classList.add('fancybox-iframe');
-        $.fancybox.open(iframe, {
+        $.fancybox.open(result, {
             baseClass: 'fancybox-container--mail-template-preview',
         });
-        $('.fancybox-container--mail-template-preview .fancybox-content').width($(result).find('div:first').width());
     });
     return false;
 };
