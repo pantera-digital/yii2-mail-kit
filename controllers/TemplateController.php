@@ -54,8 +54,12 @@ class TemplateController extends Controller
     {
         $model = new MailTemplate();
         $model->load(Yii::$app->request->post());
+        $params = $model->data ? Json::decode($model->data) : [];
+        if ($model->code_for_preview) {
+            $params = eval($model->code_for_preview);
+        }
         /** @noinspection MissedViewInspection */
-        return Yii::$app->mailer->renderTemplate($model, $model->data ? Json::decode($model->data) : []);
+        return Yii::$app->mailer->renderTemplate($model, $params);
     }
 
     /**

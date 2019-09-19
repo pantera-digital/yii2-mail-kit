@@ -4,6 +4,7 @@ namespace pantera\mail\models;
 
 use Yii;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -18,10 +19,11 @@ use yii\helpers\ArrayHelper;
  * @property string $content_type
  * @property integer $layout_id
  * @property string $data
+ * @property string $code_for_preview
  *
  * @property MailTemplate $layout
  */
-class MailTemplate extends \yii\db\ActiveRecord
+class MailTemplate extends ActiveRecord
 {
     const CONTENT_TYPE_PLAIN = 'plain';
     const CONTENT_TYPE_HTML = 'html';
@@ -73,7 +75,7 @@ class MailTemplate extends \yii\db\ActiveRecord
             [['template'], 'string'],
             [['name', 'alias', 'from', 'subject'], 'string', 'max' => 255],
             [['alias'], 'unique'],
-            [['data'], 'safe'],
+            [['data', 'code_for_preview'], 'safe'],
             [['content_type'], 'in', 'range' => array_keys($this->getContentTypeList())],
         ];
     }
@@ -93,6 +95,7 @@ class MailTemplate extends \yii\db\ActiveRecord
             'content_type' => Yii::t('mail', 'Content Type'),
             'layout_id' => Yii::t('mail', 'Layout'),
             'data' => Yii::t('mail', 'Sample data to be transferred to the template'),
+            'code_for_preview' => Yii::t('mail', 'Php code for receiving data to be transmitted to preview'),
         ];
     }
 

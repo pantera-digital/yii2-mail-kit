@@ -16,4 +16,5 @@ return [
     'No' => 'Нет',
     'Sample data to be transferred to the template' => 'Пример данных которые будут переданы в шаблон',
     'Used as layout in other letters.<br>Anyway delete?' => 'Используется как layout в других письмах.<br>Все равно удалить?',
+    'Php code for receiving data to be transmitted to preview' => 'Php код для получения данных которые передать в предпросмотр',
 ];

@@ -28,6 +28,8 @@ use yii\widgets\ActiveForm;
                 'prompt' => '',
             ]) ?>
 
+            <?= $form->field($model, 'code_for_preview')->textInput() ?>
+
             <?= $form->field($model, 'data')->hiddenInput() ?>
             <div id="mail-data-editor-container" class="form-group">
                 <div id="mail-data-editor"></div>
